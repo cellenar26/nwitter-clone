@@ -5,11 +5,13 @@ import { authService } from 'firebase';
 function App() {
   const [init, setInit] = useState(false)
   const [isLoggedIn, setIsLoogedIn] = useState(false);
+  const [userObj, setUserObj] = useState(null)
 
   useEffect(()=> {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setIsLoogedIn(user)
+        setUserObj(user)
       } else {
         setIsLoogedIn(false)
       }
@@ -18,7 +20,7 @@ function App() {
   },[])
   return (
     <>
-      {init? <AppRouter isLoggedIn={isLoggedIn}/>: "Initializing..."}
+      {init? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj}/>: "Initializing..."}
       <footer>&copy; {new Date().getFullYear()} Nwitter-clone</footer>
     </>
   );

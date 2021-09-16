@@ -1,22 +1,58 @@
-import { useState } from 'react/cjs/react.development'
+import { dbService } from "firebase";
+import { useEffect } from "react";
+import { useState } from "react/cjs/react.development";
 
-const Home = () => {
+const Home = ({userObj}) => {
+  const [nweet, setNweet] = useState("");
+  const [nweets, setNweets] = useState([]);
 
-    const [nweet, setNweet] = useState("")
+  const onSubmit = async (event) => {
+    event.preventDefault();
 
-    const onSubmit = (event) => {
-        event.preventDefault()
-    }
+    await dbService.collection("nweets").add({
+      text: nweet,
+      createdAt: Date.now(),
+      creatorId: userObj.uid
+    });
+    setNweet("");
+  };
 
-    const onChange = (event) => {
-        event.preventDefault()
-        const { target: {value},} = event
-        setNweet(value)
-    }
-    return (<form onSubmit={onSubmit}>
+  const onChange = (event) => {
+    event.preventDefault();
+    const {
+      target: { value },
+    } = event;
+    setNweet(value);
+  };
+
+  const getNweets = async () => {
+    const dbNweets = await dbService.collection("nweets").get();
+    // console.log(dbNweets);
+    dbNweets.forEach((document) => {
+      const nweetObject = { ...document.data(), id: document.id };
+      setNweets((prev) => [nweetObject, ...prev]);
+    });
+  };
+
+  useEffect(() => {
+    getNweets();
+  }, []);
+  console.log(nweets);
+  return (
+    <>
+      <form onSubmit={onSubmit}>
         <input value={nweet} onChange={onChange} type="text" placeholder="What 's on your mind?" maxLength={120} />
         <input type="submit" value="Nweet" />
-    </form>)
-}
+      </form>
+      <div>
+        {nweets.map((nweet) => (
+          <div key={nweet.id}>
+            <h4>{nweet.text}</h4>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};
 
-export default Home
+export default Home;
