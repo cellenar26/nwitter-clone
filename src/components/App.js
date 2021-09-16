@@ -5,9 +5,10 @@ import { authService } from 'firebase';
 function App() {
   const [init, setInit] = useState(false)
   const [isLoggedIn, setIsLoogedIn] = useState(false);
+
   useEffect(()=> {
     authService.onAuthStateChanged((user) => {
-      if (user === true) {
+      if (user) {
         setIsLoogedIn(user)
       } else {
         setIsLoogedIn(false)
