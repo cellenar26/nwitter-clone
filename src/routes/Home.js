@@ -40,6 +40,7 @@ const Home = ({ userObj }) => {
         id: document.id,
         ...document.data(),
       }));
+      console.log(newArray);
       setNweets(newArray);
     });
   }, []);
