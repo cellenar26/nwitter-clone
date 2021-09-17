@@ -43,6 +43,7 @@ const Auth = () => {
        }
        const data = await authService.signInWithPopup(provider)
        console.log(data);
+       console.log(data.user.uid);
   }
   return (
     <div>

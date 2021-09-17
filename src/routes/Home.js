@@ -1,3 +1,4 @@
+import Nweet from 'components/Nweet';
 import { dbService } from "firebase";
 import { useEffect } from "react";
 import { useState } from "react/cjs/react.development";
@@ -36,7 +37,7 @@ const Home = ({userObj}) => {
         setNweets(newArray)
     })
   }, []);
-  console.log(nweets);
+
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -45,9 +46,7 @@ const Home = ({userObj}) => {
       </form>
       <div>
         {nweets.map((nweet) => (
-          <div key={nweet.id}>
-            <h4>{nweet.text}</h4>
-          </div>
+          <Nweet key={nweet.id} nweetObj={nweet} isOwner={userObj.uid === nweet.creatorId}/>
         ))}
       </div>
     </>
