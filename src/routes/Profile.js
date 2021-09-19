@@ -2,7 +2,7 @@ import Nweet from "components/Nweet";
 import { authService, dbService } from "firebase";
 import { useEffect } from "react";
 import { useHistory } from "react-router";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 
 const Profile = ({ userObj,refreshUser }) => {
   const [nweets, setNweets] = useState([]);

@@ -1,5 +1,5 @@
 import { dbService, storageService } from "firebase";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);

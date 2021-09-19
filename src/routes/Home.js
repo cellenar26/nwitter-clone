@@ -2,13 +2,13 @@ import { v4 as uuid4 } from "uuid";
 import Nweet from "components/Nweet";
 import { dbService, storageService } from "firebase";
 import { useEffect } from "react";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import NweetFactory from 'components/NweetFactory';
 
 const Home = ({ userObj }) => {
   
   const [nweets, setNweets] = useState([]);
-  
+  console.log(nweets);
 
 
 
