@@ -4,7 +4,6 @@ import { authService } from 'firebase';
 
 function App() {
   const [init, setInit] = useState(false)
-  const [isLoggedIn, setIsLoogedIn] = useState(false);
   const [userObj, setUserObj] = useState(null)
 
 const refreshUser = () => {
@@ -26,7 +25,7 @@ const refreshUser = () => {
           updateProfile: (args) => user.updateProfile(args)
         })
       } else {
-        setIsLoogedIn(false)
+        setUserObj(false)
       }
       setInit(true)
     })
