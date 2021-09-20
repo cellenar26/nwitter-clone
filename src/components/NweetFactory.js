@@ -19,6 +19,9 @@ const NweetFactory = ({ userObj }) => {
       const response = await attachmentRef.putString(attachment, "data_url");
       attachmentUrl = await response.ref.getDownloadURL();
     }
+    else if (attachment === "") {
+        attachmentUrl = ""
+    }
     await dbService.collection("nweets").add({
       text: nweet,
       createdAt: Date.now(),
