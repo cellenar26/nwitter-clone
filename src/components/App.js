@@ -30,6 +30,7 @@ const refreshUser = () => {
       setInit(true)
     })
   },[])
+
   return (
     <>
       {init? <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} refreshUser={refreshUser}/>: "Initializing..."}

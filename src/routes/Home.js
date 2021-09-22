@@ -8,7 +8,7 @@ import NweetFactory from 'components/NweetFactory';
 const Home = ({ userObj }) => {
   
   const [nweets, setNweets] = useState([]);
-  console.log(nweets);
+  // console.log(nweets);
 
 
 
@@ -19,11 +19,15 @@ const Home = ({ userObj }) => {
         id: document.id,
         ...document.data(),
       }));
-      console.log(newArray);
+      // console.log(newArray);
       setNweets(newArray);
     });
+    return () => {
+      dbService.disableNetwork()
+    }
+    
   }, []);
-
+  
 
 
   return (
